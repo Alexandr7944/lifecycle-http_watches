@@ -14,12 +14,12 @@ const Clock: React.FC<ClockProps> = ({ title, timeZone, times, setTimes }) => {
   const minEl = useRef(null);
   const secEl = useRef(null);
   const [date, setDate] = useState(Date.now());
-  const houg = Math.floor(((date / 1000 / 60 / 60) + timeZone) % 12);
+  const hour = Math.floor(((date / 1000 / 60 / 60) + timeZone) % 12);
   const min = Math.floor((date / 1000 / 60 ) % 60);
   const sec = Math.floor((date / 1000 ) % 60);
   const secDeg = sec / 60 * 360;
   const minDeg = min / 60 * 360 + secDeg / 60;
-  const hougDeg = 90 + (houg / 12 * 360) + minDeg / 12;
+  const hourDeg = 90 + (hour / 12 * 360) + minDeg / 12;
   
   useEffect(() => {
     const timeId = setInterval(() => setDate(Date.now()), 1000);
@@ -41,7 +41,7 @@ const Clock: React.FC<ClockProps> = ({ title, timeZone, times, setTimes }) => {
         <div
           className="clock__hour"
           ref={hourEl}
-          style={{transform: `rotate(${hougDeg}deg)`}}
+          style={{transform: `rotate(${hourDeg}deg)`}}
         ></div>
         <div
           className="clock__minute"
@@ -53,6 +53,9 @@ const Clock: React.FC<ClockProps> = ({ title, timeZone, times, setTimes }) => {
           ref={secEl}
           style={{transform: `rotate(${secDeg}deg)`}}
         ></div>
+      </div>
+      <div className="clock__num">
+        {`${hour} : ${min} : ${sec}`}
       </div>
     </div>
   )

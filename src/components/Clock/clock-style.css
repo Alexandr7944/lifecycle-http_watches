@@ -83,3 +83,7 @@
   background-color: #000;
   transform-origin: 50% 100%;
 }
+
+.clock__num {
+  margin: 0 auto;
+}
